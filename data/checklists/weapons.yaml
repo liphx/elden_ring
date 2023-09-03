@@ -1070,7 +1070,7 @@ sections:
     - <a href="https://eldenring.wiki.fextralife.com/Caria+Manor"><b>[卡利亚城寨]</b></a>内部的<a
       href="https://eldenring.wiki.fextralife.com/Pidia,+Carian+Servant"><b>[仆人毕迪]</b></a>出售。
       <a href="https://eldenring.wiki.fextralife.com/Interactive+Map?id=2920&lat=-107.4&lng=55.6&zoom=8&code=mapA">[地图链接]</a>
-    - 失色
+    - 普通
   - id: '1_12'
     icon: /img/icons/weapons/axes/10533.png
     data:
@@ -1578,7 +1578,7 @@ sections:
     data:
     - <a href="https://eldenring.wiki.fextralife.com/Inquisitor's+Girandole"><b>拷问烛台</b></a>
     - <b>[火山官邸]</b>地下的掳人少女人偶掉落
-    - 普通
+    - 失色
   - id: '23_12'
     icon: /img/icons/weapons/spears/10602.png
     data:
@@ -1719,19 +1719,19 @@ sections:
     data:
     - <a href="https://eldenring.wiki.fextralife.com/Nightrider+Glaive"><b>黑夜骑兵剑刃戟</b></a>
     - 在<b>[湖之利耶尼亚]</b>中<b>[彼鲁姆教堂]</b>和<b>[雷亚卢卡利亚（东门）]</b>之间巡逻的<b>[黑夜骑兵]</b>掉落。
-    - 失色
+    - 普通
   - id: '25_11'
     icon: /img/icons/weapons/halberds/10681.png
     data:
     - <a href="https://eldenring.wiki.fextralife.com/Pest's+Glaive"><b>昆虫剑刃戟</b></a>
     - 昆虫掉落。有许多在<b>[盖利德的驿站街遗迹]</b>。有2个守卫着<b>[腐败病教堂]</b>。
-    - 失色
+    - 普通
   - id: '25_12'
     icon: /img/icons/weapons/halberds/10686.png
     data:
     - <a href="https://eldenring.wiki.fextralife.com/Ripple+Crescent+Halberd"><b>残缺波纹戟</b></a>
     - 使用此武器的白金之子掉落。有一群<b>赐福[湖中坠落遗迹]</b>的东边。
-    - 失色
+    - 普通
   - id: '25_13'
     icon: /img/icons/weapons/halberds/10688.png
     data:
@@ -1958,7 +1958,7 @@ sections:
     data:
     - <a href="https://eldenring.wiki.fextralife.com/Harp+Bow"><b>竖琴弓</b></a>
     - 解决<b>[绘画《英雄之歌》]</b>的奖励。画可以在<b>[日荫城]</b>找到。
-    - 普通
+    - 失色
 - title: 长弓
   link: https://eldenring.wiki.fextralife.com/Bows
   table:
@@ -1983,7 +1983,7 @@ sections:
     data:
     - <a href="https://eldenring.wiki.fextralife.com/Black+Bow"><b>黑弓</b></a>
     - 在<b>赐福[大道旁露台]</b>东北方向屋顶上的一具尸体上。
-    - 普通
+    - 失色
   - id: '10_6'
     icon: /img/icons/weapons/bows/11046.png
     data:
@@ -1995,7 +1995,7 @@ sections:
     data:
     - <a href="https://eldenring.wiki.fextralife.com/Horn+Bow"><b>角弓</b></a>
     - 可以在<b>[希芙拉河]</b>通往<b>[角骸灵地]</b>的楼梯下发现。
-    - 失色
+    - 普通
   - id: '10_5'
     icon: /img/icons/weapons/bows/11044.png
     data:
@@ -2069,7 +2069,7 @@ sections:
     data:
     - <a href="https://eldenring.wiki.fextralife.com/Arbalest"><b>钢弩</b></a>
     - 在<b>[史东薇尔城]</b>主路通往巨大院子的石阶右侧城墙内，需要先跳上左侧的大石然后跳到右边的城墙里。
-    - 失色
+    - 普通
   - id: '7_7'
     icon: /img/icons/weapons/crossbows/11128.png
     data:
@@ -2161,13 +2161,13 @@ sections:
     data:
     - <a href="https://eldenring.wiki.fextralife.com/Carian+Glintstone+Staff"><b>卡利亚辉石杖</b></a>
     - 可以在<b>[湖之利耶尼亚]</b><b>[卡利亚书斋]</b>找到，就在第2个电梯前。
-    - 失色
+    - 普通
   - id: '29_8'
     icon: /img/icons/weapons/glintstonestaffs/11208.png
     data:
     - <a href="https://eldenring.wiki.fextralife.com/Carian+Glintblade+Staff"><b>卡利亚辉剑杖</b></a>
     - 在<b>[湖之利耶尼亚]</b>东部<b>[大道监视塔]</b>的顶部发现。
-    - 失色
+    - 普通
   - id: '29_10'
     icon: /img/icons/weapons/glintstonestaffs/11204.png
     data:
@@ -2179,19 +2179,19 @@ sections:
     data:
     - <a href="https://eldenring.wiki.fextralife.com/Albinauric+Staff"><b>白金杖</b></a>
     - 在<b>[火山官邸]</b><b>赐福[迎宾厅]</b>附近的<b>[恶兆猎人]</b>掉落。
-    - 失色
+    - 普通
   - id: '29_12'
     icon: /img/icons/weapons/glintstonestaffs/11219.png
     data:
     - <a href="https://eldenring.wiki.fextralife.com/Staff+of+Loss"><b>丧失杖</b></a>
     - 在<b>[盖利德]</b><b>[魔法镇瑟利亚]</b>阳台上的一具尸体上。
-    - 失色
+    - 普通
   - id: '29_13'
     icon: /img/icons/weapons/glintstonestaffs/11202.png
     data:
     - <a href="https://eldenring.wiki.fextralife.com/Gelmir+Glintstone+Staff"><b>格密尔辉石杖</b></a>
     - 在<b>[火山官邸]</b>正殿上方挥舞着这个武器的蛇人掉落。
-    - 失色
+    - 普通
   - id: '29_14'
     icon: /img/icons/weapons/glintstonestaffs/11201.png
     data:
@@ -2209,19 +2209,19 @@ sections:
     data:
     - <a href="https://eldenring.wiki.fextralife.com/Meteorite+Staff"><b>陨石杖</b></a>
     - 在<b>[盖利德]</b>西部<b>[贤者镇的废墟]</b>边缘的一具尸体上。
-    - 失色
+    - 不可强化
   - id: '29_17'
     icon: /img/icons/weapons/glintstonestaffs/11217.png
     data:
     - <a href="https://eldenring.wiki.fextralife.com/Staff+of+the+Guilty"><b>罪人杖</b></a>
     - 在<b>[格密尔火山]</b>的<b>[莱多要塞]</b>处挥舞此武器的敌人掉落
-    - 失色
+    - 普通
   - id: '29_18'
     icon: /img/icons/weapons/glintstonestaffs/11209.png
     data:
     - <a href="https://eldenring.wiki.fextralife.com/Prince+of+Death's+Staff"><b>死王子杖</b></a>
     - 在<b>[深根底层]</b>中找到。顺着这条小路沿着树根往上走，在第一个水池左转，继续走到塔。
-    - 失色
+    - 普通
 - title: 圣印记
   link: https://eldenring.wiki.fextralife.com/Sacred+Seals
   table:
@@ -2240,13 +2240,13 @@ sections:
     data:
     - <a href="https://eldenring.wiki.fextralife.com/Erdtree+Seal"><b>黄金树圣印记</b></a>
     - 在<b>赐福[牢镇教堂]</b>附近<b>[恶兆猎人]</b>后的尸体上发现的
-    - 普通
+    - 失色
   - id: '30_3'
     icon: /img/icons/weapons/sacredseals/11247.png
     data:
     - <a href="https://eldenring.wiki.fextralife.com/Golden+Order+Seal"><b>黄金律法圣印记</b></a>
     - 在<b>[小黄金树教堂]</b>附近的一具尸体上。
-    - 普通
+    - 失色
   - id: '30_4'
     icon: /img/icons/weapons/sacredseals/11243.png
     data:
@@ -2319,7 +2319,7 @@ sections:
     data:
     - <a href="https://eldenring.wiki.fextralife.com/Ghostflame+Torch"><b>灵火火把</b></a>
     - 可以在进入<b>[“永恒之城”诺克隆恩]</b>后找到，通过<b>[星星坠落之地]</b>。在到达第一个屋顶部分后，跳上塔去拿到火把。
-    - 失色
+    - 普通
   - id: '31_6'
     icon: /img/icons/weapons/torches/10924.png
     data:
@@ -2644,7 +2644,7 @@ sections:
     - <a href="https://eldenring.wiki.fextralife.com/Great+Turtle+Shell"><b>大乌龟壳</b></a>
     - '<a href="https://eldenring.wiki.fextralife.com/Weeping+Peninsula"><b>[啜泣半岛]</b></a>:
       从<b>赐福[摩恩城（城墙前方）]</b>出发向东寻找龙卷风并使用它往屋顶跳，这是城墙的一部分。盾牌可以在塔顶的尸体上找到。<a href="https://eldenring.wiki.fextralife.com/Interactive+Map?id=721&lat=-215.8375&lng=116.255754&zoom=8&code=mapA">[地图链接]</a>'
-    - 失色
+    - 普通
 - title: 大盾
   link: https://eldenring.wiki.fextralife.com/Greatshields
   table:
@@ -2687,7 +2687,7 @@ sections:
     - <a href="https://eldenring.wiki.fextralife.com/Icon+Shield"><b>神圣绘画盾</b></a>
     - 在<a href="https://eldenring.wiki.fextralife.com/Woodfolk+Ruins"><b>[森林之民的废墟]</b></a>一个摇摇欲坠的建筑里发现。小心里面的敌人。<a
       href="https://eldenring.wiki.fextralife.com/Interactive+Map?id=3206&lat=-85.76&lng=95.806&zoom=8&code=mapA">[地图链接]</a>
-    - 普通
+    - 失色
   - id: '34_7'
     icon: /img/icons/weapons/greatshields/12087.png
     data:
