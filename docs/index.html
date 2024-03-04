@@ -27,10 +27,14 @@
         <a class="navbar-brand me-auto ms-2 active" href="/index.html">圆桌指引</a>
         <form class="d-none d-sm-flex order-2 order-xl-3">
           <input aria-label="search" class="form-control me-2" name="search" placeholder="搜索" type="search">
-          <button class="btn" formaction="/search.html" formmethod="get" formnovalidate="true" type="submit"><i class="bi bi-search"></i></button>
+          <button class="btn" formaction="/search.html" formmethod="get" formnovalidate="true" type="submit">
+            <i class="bi bi-search"></i>
+          </button>
         </form>
         <div class="d-sm-none order-2">
-          <a class="nav-link me-0" href="/search.html"><i class="bi bi-search sb-icon-search"></i></a>
+          <a class="nav-link me-0" href="/search.html">
+            <i class="bi bi-search sb-icon-search"></i>
+          </a>
         </div>
         <div class="collapse navbar-collapse order-3 order-xl-2 ms-xl-2" id="nav-collapse">
           <ul class="nav navbar-nav navbar-nav-scroll mr-auto">
@@ -187,10 +191,14 @@
               </ul>
             </li>
             <li class="nav-item tab-li">
-              <a class="nav-link hide-buttons" href="/map.html"><i class="bi bi-map"></i> 地图</a>
+              <a class="nav-link hide-buttons" href="/map.html">
+                <i class="bi bi-map"></i> 地图
+              </a>
             </li>
             <li class="nav-item tab-li">
-              <a class="nav-link hide-buttons" href="/options.html"><i class="bi bi-gear-fill"></i> 选项</a>
+              <a class="nav-link hide-buttons" href="/options.html">
+                <i class="bi bi-gear-fill"></i> 选项
+              </a>
             </li>
           </ul>
         </div>
@@ -198,297 +206,236 @@
     </nav>
     <div class="container">
       <div class="row">
-        <div class="col-md-12 text-center">
-          <h1 class="mt-4">圆桌指引</h1>
+        <div class="col-md text-center">
+          <h1>艾尔登法环游戏记录</h1>
         </div>
-        <div class="row gy-3">
-          <div class="col-md-4 col-12">
-            <div class="card shadow">
-              <div class="card-body uncolor-links">
-                <h5 class="card-title text-center">进度追踪</h5>
-                <ul class="nav flex-column" id="progress_list">
-                  <hr>
-                  <li class="tab-li">
-                    <a href="/checklists/playthrough.html">流程攻略
-                      <span class="d-print-none" id="playthrough_progress_total"></span>
-                    </a>
-                  </li>
-                  <li class="tab-li">
-                    <a href="/checklists/quest_order_tldr.html"> TL;DR All NPC Quest Steps in Order
-                      <span class="d-print-none" id="quest_order_tldr_progress_total"></span>
-                    </a>
-                  </li>
-                  <li class="tab-li">
-                    <a href="/checklists/npc_quests.html">NPC任务线
-                      <span class="d-print-none" id="npc_quests_progress_total"></span>
-                    </a>
-                  </li>
-                  <li class="tab-li">
-                    <a href="/checklists/achievements.html">成就
-                      <span class="d-print-none" id="achievements_progress_total"></span>
-                    </a>
-                  </li>
-                  <li class="tab-li">
-                    <a href="/checklists/legendaries.html">传说中的道具
-                      <span class="d-print-none" id="legendaries_progress_total"></span>
-                    </a>
-                  </li>
-                  <hr>
-                  <li class="tab-li">
-                    <a href="/checklists/bosses.html">Boss
-                      <span class="d-print-none" id="bosses_progress_total"></span>
-                    </a>
-                  </li>
-                  <li class="tab-li">
-                    <a href="/checklists/caves.html">地标和位置
-                      <span class="d-print-none" id="caves_progress_total"></span>
-                    </a>
-                  </li>
-                  <li class="tab-li">
-                    <a href="/checklists/graces.html">赐福点
-                      <span class="d-print-none" id="graces_progress_total"></span>
-                    </a>
-                  </li>
-                  <li class="tab-li">
-                    <a href="/checklists/illusory_walls.html">幻影墙和隐藏通道
-                      <span class="d-print-none" id="illusory_walls_progress_total"></span>
-                    </a>
-                  </li>
-                  <hr>
-                  <li class="tab-li">
-                    <a href="/checklists/weapons.html">武器
-                      <span class="d-print-none" id="weapons_progress_total"></span>
-                    </a>
-                  </li>
-                  <li class="tab-li">
-                    <a href="/checklists/armor.html">防具
-                      <span class="d-print-none" id="armor_progress_total"></span>
-                    </a>
-                  </li>
-                  <li class="tab-li">
-                    <a href="/checklists/talismans.html">护符
-                      <span class="d-print-none" id="talismans_progress_total"></span>
-                    </a>
-                  </li>
-                  <li class="tab-li">
-                    <a href="/checklists/talisbyregion.html">护符(按区域)
-                      <span class="d-print-none" id="talisbyregion_progress_total"></span>
-                    </a>
-                  </li>
-                  <li class="tab-li">
-                    <a href="/checklists/sorceries.html">魔法
-                      <span class="d-print-none" id="sorceries_progress_total"></span>
-                    </a>
-                  </li>
-                  <li class="tab-li">
-                    <a href="/checklists/sorcbyregion.html">魔法(按区域)
-                      <span class="d-print-none" id="sorcbyregion_progress_total"></span>
-                    </a>
-                  </li>
-                  <li class="tab-li">
-                    <a href="/checklists/incantations.html">祷告
-                      <span class="d-print-none" id="incantations_progress_total"></span>
-                    </a>
-                  </li>
-                  <li class="tab-li">
-                    <a href="/checklists/incantbyregion.html">祷告(按区域)
-                      <span class="d-print-none" id="incantbyregion_progress_total"></span>
-                    </a>
-                  </li>
-                  <li class="tab-li">
-                    <a href="/checklists/ashesofwar.html">战灰
-                      <span class="d-print-none" id="ashesofwar_progress_total"></span>
-                    </a>
-                  </li>
-                  <li class="tab-li">
-                    <a href="/checklists/ashesbyregion.html">战灰(按区域)
-                      <span class="d-print-none" id="ashesbyregion_progress_total"></span>
-                    </a>
-                  </li>
-                  <li class="tab-li">
-                    <a href="/checklists/spirit_ashes.html">灵魂骨灰
-                      <span class="d-print-none" id="spirit_ashes_progress_total"></span>
-                    </a>
-                  </li>
-                  <li class="tab-li">
-                    <a href="/checklists/spiritbyregion.html">灵魂骨灰(按区域)
-                      <span class="d-print-none" id="spiritbyregion_progress_total"></span>
-                    </a>
-                  </li>
-                  <hr>
-                  <li class="tab-li">
-                    <a href="/checklists/flasks.html">黄金种子&amp;圣杯滴露
-                      <span class="d-print-none" id="flasks_progress_total"></span>
-                    </a>
-                  </li>
-                  <li class="tab-li">
-                    <a href="/checklists/crystal_tears.html">灵药圣杯瓶
-                      <span class="d-print-none" id="crystal_tears_progress_total"></span>
-                    </a>
-                  </li>
-                  <li class="tab-li">
-                    <a href="/checklists/memory_stones_talisman_pouches.html">记忆石&amp;护符皮袋
-                      <span class="d-print-none" id="memory_stones_talisman_pouches_progress_total"></span>
-                    </a>
-                  </li>
-                  <li class="tab-li">
-                    <a href="/checklists/scrolls_prayerbooks.html">卷轴&amp;祷告书
-                      <span class="d-print-none" id="scrolls_prayerbooks_progress_total"></span>
-                    </a>
-                  </li>
-                  <li class="tab-li">
-                    <a href="/checklists/whetstones.html">砥石刀
-                      <span class="d-print-none" id="whetstones_progress_total"></span>
-                    </a>
-                  </li>
-                  <li class="tab-li">
-                    <a href="/checklists/bell_bearings.html">铃珠
-                      <span class="d-print-none" id="bell_bearings_progress_total"></span>
-                    </a>
-                  </li>
-                  <li class="tab-li">
-                    <a href="/checklists/cookbooks.html">制作笔记
-                      <span class="d-print-none" id="cookbooks_progress_total"></span>
-                    </a>
-                  </li>
-                  <li class="tab-li">
-                    <a href="/checklists/ancient_dragon_smithing_stones.html">古龙岩锻造石
-                      <span class="d-print-none" id="ancient_dragon_smithing_stones_progress_total"></span>
-                    </a>
-                  </li>
-                  <li class="tab-li">
-                    <a href="/checklists/great_gloveworts.html">大朵墓地铃兰
-                      <span class="d-print-none" id="great_gloveworts_progress_total"></span>
-                    </a>
-                  </li>
-                  <hr>
-                  <li class="tab-li">
-                    <a href="/checklists/remembrances_mausoleums.html">追忆&amp;灵庙
-                      <span class="d-print-none" id="remembrances_mausoleums_progress_total"></span>
-                    </a>
-                  </li>
-                  <li class="tab-li">
-                    <a href="/checklists/great_runes.html">大卢恩
-                      <span class="d-print-none" id="great_runes_progress_total"></span>
-                    </a>
-                  </li>
-                  <li class="tab-li">
-                    <a href="/checklists/stonesword.html">石剑钥匙&amp;小恶魔封印
-                      <span class="d-print-none" id="stonesword_progress_total"></span>
-                    </a>
-                  </li>
-                  <li class="tab-li">
-                    <a href="/checklists/dragon_hearts_death_roots.html">龙心脏&amp;死根
-                      <span class="d-print-none" id="dragon_hearts_death_roots_progress_total"></span>
-                    </a>
-                  </li>
-                  <li class="tab-li">
-                    <a href="/checklists/tears_dews.html">泪滴幼体&amp;星星泪滴
-                      <span class="d-print-none" id="tears_dews_progress_total"></span>
-                    </a>
-                  </li>
-                  <li class="tab-li">
-                    <a href="/checklists/paintings.html">绘画
-                      <span class="d-print-none" id="paintings_progress_total"></span>
-                    </a>
-                  </li>
-                  <li class="tab-li">
-                    <a href="/checklists/pots_bottles.html">壶&amp;调香瓶
-                      <span class="d-print-none" id="pots_bottles_progress_total"></span>
-                    </a>
-                  </li>
-                  <li class="tab-li">
-                    <a href="/checklists/tools.html">工具&amp;多人联机游玩道具
-                      <span class="d-print-none" id="tools_progress_total"></span>
-                    </a>
-                  </li>
-                  <li class="tab-li">
-                    <a href="/checklists/gestures.html">肢体动作
-                      <span class="d-print-none" id="gestures_progress_total"></span>
-                    </a>
-                  </li>
-                  <hr>
-                </ul>
-              </div>
+        <div class="row row-cols-md-3">
+          <div class="card shadow">
+            <div class="card-body uncolor-links">
+              <li class="tab-li">
+                <a href="/checklists/playthrough.html">流程攻略
+                  <span class="d-print-none" id="playthrough_progress_total"></span>
+                </a>
+              </li>
+              <li class="tab-li">
+                <a href="/checklists/quest_order_tldr.html"> TL;DR All NPC Quest Steps in Order
+                  <span class="d-print-none" id="quest_order_tldr_progress_total"></span>
+                </a>
+              </li>
+              <li class="tab-li">
+                <a href="/checklists/npc_quests.html">NPC任务线
+                  <span class="d-print-none" id="npc_quests_progress_total"></span>
+                </a>
+              </li>
+              <li class="tab-li">
+                <a href="/checklists/achievements.html">成就
+                  <span class="d-print-none" id="achievements_progress_total"></span>
+                </a>
+              </li>
+              <li class="tab-li">
+                <a href="/checklists/legendaries.html">传说中的道具
+                  <span class="d-print-none" id="legendaries_progress_total"></span>
+                </a>
+              </li>
             </div>
           </div>
-          <div class="col-md-8 col-12">
-            <div class="row row-cols-1 row-cols-md-2 gy-3">
-              <div class="col">
-                <div class="card shadow h-100">
-                  <div class="card-body">
-                    <h5 class="card-title text-center">欢迎来到圆桌指引</h5>
-                    <p class="card-text">艾尔登法环指引，攻略和进度追踪。由玩家编写和维护。我们还在努力改进和完善站点内容。</p>
-                  </div>
-                </div>
-              </div>
-              <div class="col">
-                <div class="card shadow h-100">
-                  <div class="card-body">
-                    <h5 class="card-title text-center">Get the Apps!</h5>
-                    <div class="badge" style="width: 180px;">
-                      <a href="https://apps.apple.com/us/app/elden-ring-guides/id1620436088?itsct=apps_box_badge&amp;amp;itscg=30200">
-                        <img alt="Download on the App Store" src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83&amp;amp;releaseDate=1650585600&amp;h=3eb10370b9c49cf5b5dde5ca0352f23a" style="margin: 6%; width: 88%;">
-                      </a>
-                    </div>
-                    <div class="badge" style="width: 180px;">
-                      <a href="https://play.google.com/store/apps/details?id=com.roundtablehold.eldenringguides&amp;pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1" style="width: 100%;">
-                        <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" style="width: 100%;">
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col">
-                <div class="card shadow h-100">
-                  <div class="card-body">
-                    <h5 class="card-title text-center">相关资源(英文版)</h5>
-                    <p class="card-text">加入圆桌厅 
-                      <a href="https://discord.gg/BzJzFeBjHr">Discord 社区</a>
-                    </p>
-                    <p class="card-text">更多来自社区的指引请看 
-                      <a href="https://www.reddit.com/r/Roundtable_Guides/">/r/Roundtable_Guides</a>
-                    </p>
-                    <p class="card-text">视频指引请看 
-                      <a href="https://www.youtube.com/channel/UCE-I15Z8HQBNCFHq2V0bbsA">YouTube 频道</a>
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div class="col">
-                <div class="card shadow h-100">
-                  <div class="card-body">
-                    <h5 class="card-title text-center">我有问题要反馈，怎么对项目做出贡献？</h5>
-                    <p class="card-text">方法很简单，你并不需要懂得如何编写网页代码，你可以在Github仓库
-                      <a href="https://github.com/RoundtableHold/roundtablehold.github.io">(英文版)</a>找到说明，或者直接去反馈bug
-                      <a href="https://github.com/RoundtableHold/roundtablehold.github.io/issues">(英文版)</a>
-                      <a href="https://github.com/soarqin/roundtablehold/issues">(中文版)</a>，我们会尽快修复汇报的问题。
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div class="col">
-                <div class="card shadow h-100">
-                  <div class="card-body">
-                    <h5 class="card-title text-center">我可以追踪多个角色吗？</h5>
-                    <p class="card-text">可以，用选项页签的档案选择器设置多个不同的档案。</p>
-                  </div>
-                </div>
-              </div>
-              <div class="col">
-                <div class="card shadow h-100">
-                  <div class="card-body">
-                    <h5 class="card-title text-center">列表追踪状态是怎么保存的？</h5>
-                    <p class="card-text">列表追踪状态数据保存在浏览器本地存储里。小心！清除浏览器缓存也会清空你的数据。</p>
-                  </div>
-                </div>
-              </div>
+          <div class="card shadow">
+            <div class="card-body uncolor-links">
+              <li class="tab-li">
+                <a href="/checklists/bosses.html">Boss
+                  <span class="d-print-none" id="bosses_progress_total"></span>
+                </a>
+              </li>
+              <li class="tab-li">
+                <a href="/checklists/caves.html">地标和位置
+                  <span class="d-print-none" id="caves_progress_total"></span>
+                </a>
+              </li>
+              <li class="tab-li">
+                <a href="/checklists/graces.html">赐福点
+                  <span class="d-print-none" id="graces_progress_total"></span>
+                </a>
+              </li>
+              <li class="tab-li">
+                <a href="/checklists/illusory_walls.html">幻影墙和隐藏通道
+                  <span class="d-print-none" id="illusory_walls_progress_total"></span>
+                </a>
+              </li>
+            </div>
+          </div>
+          <div class="card shadow">
+            <div class="card-body uncolor-links">
+              <li class="tab-li">
+                <a href="/checklists/weapons.html">武器
+                  <span class="d-print-none" id="weapons_progress_total"></span>
+                </a>
+              </li>
+              <li class="tab-li">
+                <a href="/checklists/armor.html">防具
+                  <span class="d-print-none" id="armor_progress_total"></span>
+                </a>
+              </li>
+              <li class="tab-li">
+                <a href="/checklists/talismans.html">护符
+                  <span class="d-print-none" id="talismans_progress_total"></span>
+                </a>
+              </li>
+              <li class="tab-li">
+                <a href="/checklists/talisbyregion.html">护符(按区域)
+                  <span class="d-print-none" id="talisbyregion_progress_total"></span>
+                </a>
+              </li>
+              <li class="tab-li">
+                <a href="/checklists/sorceries.html">魔法
+                  <span class="d-print-none" id="sorceries_progress_total"></span>
+                </a>
+              </li>
+              <li class="tab-li">
+                <a href="/checklists/sorcbyregion.html">魔法(按区域)
+                  <span class="d-print-none" id="sorcbyregion_progress_total"></span>
+                </a>
+              </li>
+              <li class="tab-li">
+                <a href="/checklists/incantations.html">祷告
+                  <span class="d-print-none" id="incantations_progress_total"></span>
+                </a>
+              </li>
+              <li class="tab-li">
+                <a href="/checklists/incantbyregion.html">祷告(按区域)
+                  <span class="d-print-none" id="incantbyregion_progress_total"></span>
+                </a>
+              </li>
+              <li class="tab-li">
+                <a href="/checklists/ashesofwar.html">战灰
+                  <span class="d-print-none" id="ashesofwar_progress_total"></span>
+                </a>
+              </li>
+              <li class="tab-li">
+                <a href="/checklists/ashesbyregion.html">战灰(按区域)
+                  <span class="d-print-none" id="ashesbyregion_progress_total"></span>
+                </a>
+              </li>
+              <li class="tab-li">
+                <a href="/checklists/spirit_ashes.html">灵魂骨灰
+                  <span class="d-print-none" id="spirit_ashes_progress_total"></span>
+                </a>
+              </li>
+              <li class="tab-li">
+                <a href="/checklists/spiritbyregion.html">灵魂骨灰(按区域)
+                  <span class="d-print-none" id="spiritbyregion_progress_total"></span>
+                </a>
+              </li>
+            </div>
+          </div>
+          <div class="card shadow">
+            <div class="card-body uncolor-links">
+              <li class="tab-li">
+                <a href="/checklists/flasks.html">黄金种子&amp;圣杯滴露
+                  <span class="d-print-none" id="flasks_progress_total"></span>
+                </a>
+              </li>
+              <li class="tab-li">
+                <a href="/checklists/crystal_tears.html">灵药圣杯瓶
+                  <span class="d-print-none" id="crystal_tears_progress_total"></span>
+                </a>
+              </li>
+              <li class="tab-li">
+                <a href="/checklists/memory_stones_talisman_pouches.html">记忆石&amp;护符皮袋
+                  <span class="d-print-none" id="memory_stones_talisman_pouches_progress_total"></span>
+                </a>
+              </li>
+              <li class="tab-li">
+                <a href="/checklists/scrolls_prayerbooks.html">卷轴&amp;祷告书
+                  <span class="d-print-none" id="scrolls_prayerbooks_progress_total"></span>
+                </a>
+              </li>
+              <li class="tab-li">
+                <a href="/checklists/whetstones.html">砥石刀
+                  <span class="d-print-none" id="whetstones_progress_total"></span>
+                </a>
+              </li>
+              <li class="tab-li">
+                <a href="/checklists/bell_bearings.html">铃珠
+                  <span class="d-print-none" id="bell_bearings_progress_total"></span>
+                </a>
+              </li>
+              <li class="tab-li">
+                <a href="/checklists/cookbooks.html">制作笔记
+                  <span class="d-print-none" id="cookbooks_progress_total"></span>
+                </a>
+              </li>
+              <li class="tab-li">
+                <a href="/checklists/ancient_dragon_smithing_stones.html">古龙岩锻造石
+                  <span class="d-print-none" id="ancient_dragon_smithing_stones_progress_total"></span>
+                </a>
+              </li>
+              <li class="tab-li">
+                <a href="/checklists/great_gloveworts.html">大朵墓地铃兰
+                  <span class="d-print-none" id="great_gloveworts_progress_total"></span>
+                </a>
+              </li>
+            </div>
+          </div>
+          <div class="card shadow">
+            <div class="card-body uncolor-links">
+              <li class="tab-li">
+                <a href="/checklists/remembrances_mausoleums.html">追忆&amp;灵庙
+                  <span class="d-print-none" id="remembrances_mausoleums_progress_total"></span>
+                </a>
+              </li>
+              <li class="tab-li">
+                <a href="/checklists/great_runes.html">大卢恩
+                  <span class="d-print-none" id="great_runes_progress_total"></span>
+                </a>
+              </li>
+              <li class="tab-li">
+                <a href="/checklists/stonesword.html">石剑钥匙&amp;小恶魔封印
+                  <span class="d-print-none" id="stonesword_progress_total"></span>
+                </a>
+              </li>
+              <li class="tab-li">
+                <a href="/checklists/dragon_hearts_death_roots.html">龙心脏&amp;死根
+                  <span class="d-print-none" id="dragon_hearts_death_roots_progress_total"></span>
+                </a>
+              </li>
+              <li class="tab-li">
+                <a href="/checklists/tears_dews.html">泪滴幼体&amp;星星泪滴
+                  <span class="d-print-none" id="tears_dews_progress_total"></span>
+                </a>
+              </li>
+              <li class="tab-li">
+                <a href="/checklists/paintings.html">绘画
+                  <span class="d-print-none" id="paintings_progress_total"></span>
+                </a>
+              </li>
+              <li class="tab-li">
+                <a href="/checklists/pots_bottles.html">壶&amp;调香瓶
+                  <span class="d-print-none" id="pots_bottles_progress_total"></span>
+                </a>
+              </li>
+              <li class="tab-li">
+                <a href="/checklists/tools.html">工具&amp;多人联机游玩道具
+                  <span class="d-print-none" id="tools_progress_total"></span>
+                </a>
+              </li>
+              <li class="tab-li">
+                <a href="/checklists/gestures.html">肢体动作
+                  <span class="d-print-none" id="gestures_progress_total"></span>
+                </a>
+              </li>
+            </div>
+          </div>
+          <div class="card shadow">
+            <div class="card-body">
+              <p class="card-text">
+                <a href="https://github.com/liphx/elden_ring">本站</a>fork自
+                <a href="https://github.com/soarqin/roundtablehold">roundtablehold</a>，用于展示个人游戏进度，记录功能可使用原仓库
+              </p>
             </div>
           </div>
         </div>
       </div>
       <script src="/js/jquery.min.js"></script>
-      <script src="/js/jstorage.min.js"></script>
       <script src="/js/progress.js"></script>
       <script src="/js/item_links.js"></script>
       <script src="/js/common.js"></script>

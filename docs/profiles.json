@@ -1,0 +1,22 @@
+{
+    "current": "liph",
+    "elden_ring": {
+        "liph": {
+            "checklistData": {
+                "weapons_3_1": true,
+                "weapons_3_3": true
+            },
+            "collapsed": {},
+            "hide_completed": false,
+            "journey": 1,
+            "style": "Standard",
+            "map_settings": {
+                "previousPosition": [
+                    "5.00",
+                    "4129.00",
+                    "-7328.00"
+                ]
+            }
+        }
+    }
+}

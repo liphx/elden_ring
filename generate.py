@@ -19,8 +19,10 @@ def to_snake_case(name):
     name = re.sub(r'([a-z0-9])([A-Z])', r'\1_\2', name)
     return name.lower()
 
+
 def strip_a_tags(s):
     return re.sub(r'(?i)</?a[^>]*>', '', s)
+
 
 dropdowns = []
 pages = []
@@ -34,14 +36,16 @@ with open(os.path.join('data', 'pages.yaml'), 'r', encoding='utf_8') as pages_ya
             with open(os.path.join('data', 'checklists', page), 'r', encoding='utf_8') as data:
                 yml = yaml.safe_load(data)
                 pages.append(yml)
-                dropdown_urls.append((yml['title'], yml['id'], yml.get('map_icon', yml.get('icon', None))))
+                dropdown_urls.append(
+                    (yml['title'], yml['id'], yml.get('map_icon', yml.get('icon', None))))
         dropdowns.append((dropdown['name'], dropdown_urls))
 
 page_ids = set()
 all_ids = set()
 for page in pages:
     if page['id'] in page_ids:
-        print("Duplicate page id '" + page['id'] + "' found. All page ids must be unique.")
+        print("Duplicate page id '" +
+              page['id'] + "' found. All page ids must be unique.")
         quit(1)
     else:
         page_ids.add(page['id'])
@@ -49,7 +53,8 @@ for page in pages:
     if 'table_widths' in page:
         t_w = page['table_widths']
         if sum(t_w) != 12:
-            print("table_widths on page " + page['id'] + ' does not add up to 12')
+            print("table_widths on page " +
+                  page['id'] + ' does not add up to 12')
 
     item_nums = set()
     for section in page['sections']:
@@ -57,12 +62,15 @@ for page in pages:
         for item in items:
             if isinstance(item, str):
                 continue
+
             def f(item):
                 if not isinstance(item['id'], str):
-                    print("Please make item id " + str(item['id']) + ' a string by wrapping it in quotes. Found on page ' + page['id'] + ' in section "' + section['title'] + '"')
+                    print("Please make item id " + str(
+                        item['id']) + ' a string by wrapping it in quotes. Found on page ' + page['id'] + ' in section "' + section['title'] + '"')
                     quit(1)
                 if (page['id'] + '_' + item['id']) in all_ids:
-                    print("Duplicate item id '" + str(item['id']) + "' in section '" + str(section['title']) + "' found in page '" + page['id'] + "'. All item ids must be unique within each page.")
+                    print("Duplicate item id '" + str(item['id']) + "' in section '" + str(
+                        section['title']) + "' found in page '" + page['id'] + "'. All item ids must be unique within each page.")
                     quit(1)
                 all_ids.add(page['id'] + '_' + item['id'])
             f(item)
@@ -73,26 +81,33 @@ for page in pages:
     if 'realid' not in page:
         page['realid'] = page['id']
 
+
 def make_doc(title, description):
     doc = dominate.document(title=title)
     doc.set_attribute('lang', 'en')
     with doc.head:
         meta(charset="UTF-8")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
-        link(rel="apple-touch-icon", sizes="180x180", href="/img/apple-touch-icon.png")
-        link(rel="icon", type="image/png", sizes="32x32", href="/img/favicon-32x32.png")
-        link(rel="icon", type="image/png", sizes="16x16", href="/img/favicon-16x16.png")
+        link(rel="apple-touch-icon", sizes="180x180",
+             href="/img/apple-touch-icon.png")
+        link(rel="icon", type="image/png", sizes="32x32",
+             href="/img/favicon-32x32.png")
+        link(rel="icon", type="image/png", sizes="16x16",
+             href="/img/favicon-16x16.png")
         link(rel="manifest", href="/img/site.webmanifest")
         meta(name="theme-color", content="#ffffff")
         meta(name="apple-mobile-web-app-capable", content="yes")
         meta(name="mobile-web-app-capable", content="yes")
-        meta(name="description", content="Cheat sheet for Elden Ring. Checklist of things to do, items to get etc.")
+        meta(name="description",
+             content="Cheat sheet for Elden Ring. Checklist of things to do, items to get etc.")
         meta(name="author", content="Ben Lambeth")
         meta(name="mobile-web-app-capable", content="yes")
         link(href="/css/bootstrap.min.css", rel="stylesheet", id="bootstrap")
-        link(rel="stylesheet", href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css")
+        link(rel="stylesheet",
+             href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css")
         link(href="/css/main.css", rel="stylesheet")
     return doc
+
 
 def title_row():
     with div(cls="row"):
@@ -106,6 +121,7 @@ def title_row():
             text += a("Github Page",
                       href="https://github.com/soarqin/roundtablehold")
 
+
 def hide_completed_button():
     with div(id="btnHideCompleted", cls="mb-3 d-print-none"):
         with div(cls="form-check form-switch"):
@@ -114,33 +130,43 @@ def hide_completed_button():
             label("隐藏已完成", cls="form-check-label",
                   _for='toggleHideCompleted')
 
-def make_nav(page, is_map = False):
+
+def make_nav(page, is_map=False):
     with nav(cls="navbar navbar-expand-xl bg-dark navbar-dark d-print-none" + (' sticky-top' if not is_map else ''), id="top_nav"):
         with div(cls="container-fluid"):
             # with div(cls='order-sm-last d-none d-sm-block ms-auto'):
             with button(type="button", cls="navbar-toggler", data_bs_toggle="collapse", data_bs_target="#nav-collapse", aria_expanded="false", aria_controls="nav-collapse", aria_label="Toggle navigation"):
                 span(cls="navbar-toggler-icon")
-            a('圆桌指引', cls="navbar-brand me-auto ms-2" + (' active' if page == 'index' else ''), href="/index.html")
+            a('圆桌指引', cls="navbar-brand me-auto ms-2" +
+              (' active' if page == 'index' else ''), href="/index.html")
             with form(cls="d-none d-sm-flex order-2 order-xl-3"):
-                input_(cls='form-control me-2', type='search', placeholder='搜索', aria_label='search', name='search')
-                button(type='submit', cls='btn', formaction='/search.html', formmethod='get', formnovalidate='true').add(i(cls='bi bi-search'))
+                input_(cls='form-control me-2', type='search',
+                       placeholder='搜索', aria_label='search', name='search')
+                button(type='submit', cls='btn', formaction='/search.html',
+                       formmethod='get', formnovalidate='true').add(i(cls='bi bi-search'))
             with div(cls='d-sm-none order-2'):
-                a(href='/search.html', cls='nav-link me-0').add(i(cls='bi bi-search sb-icon-search'))
+                a(href='/search.html',
+                  cls='nav-link me-0').add(i(cls='bi bi-search sb-icon-search'))
             with div(cls="collapse navbar-collapse order-3 order-xl-2 ms-xl-2", id="nav-collapse"):
                 with ul(cls="nav navbar-nav navbar-nav-scroll mr-auto"):
                     # with li(cls="nav-item"):
                     #     a(href="/index.html", cls="nav-link hide-buttons" + (' active' if page == 'index' else '')).add(i(cls="bi bi-house-fill"))
                     for name, l in dropdowns:
-                        page_in_dropdown = page in [to_snake_case(guide[1]) for guide in l]
+                        page_in_dropdown = page in [
+                            to_snake_case(guide[1]) for guide in l]
                         with li(cls="dropdown nav-item"):
-                            a(name, cls="nav-link dropdown-toggle" + (' active' if page_in_dropdown else ''), href="#", data_bs_toggle="dropdown", aria_haspopup="true", aria_expanded="false").add(span(cls="caret"))
+                            a(name, cls="nav-link dropdown-toggle" + (' active' if page_in_dropdown else ''), href="#",
+                              data_bs_toggle="dropdown", aria_haspopup="true", aria_expanded="false").add(span(cls="caret"))
                             with ul(cls="dropdown-menu"):
                                 for guide in l:
-                                    li(cls='tab-li').add(a(guide[0], cls="dropdown-item show-buttons"  + (' active' if page == to_snake_case(guide[1]) else ''), href='/checklists/' + to_snake_case(guide[1]) + '.html'))
+                                    li(cls='tab-li').add(a(guide[0], cls="dropdown-item show-buttons" + (' active' if page == to_snake_case(
+                                        guide[1]) else ''), href='/checklists/' + to_snake_case(guide[1]) + '.html'))
                     with li(cls='nav-item tab-li'):
-                        a(href="/map.html", cls="nav-link hide-buttons" + (' active' if page == 'map' else '')).add(i(cls="bi bi-map"), " 地图")
+                        a(href="/map.html", cls="nav-link hide-buttons" +
+                          (' active' if page == 'map' else '')).add(i(cls="bi bi-map"), " 地图")
                     with li(cls="nav-item tab-li"):
-                        a(href="/options.html", cls="nav-link hide-buttons" + (' active' if page == 'options' else '')).add(i(cls="bi bi-gear-fill"), " 选项")
+                        a(href="/options.html", cls="nav-link hide-buttons" + (' active' if page ==
+                          'options' else '')).add(i(cls="bi bi-gear-fill"), " 选项")
 
 # def make_sidebar_nav(page):
 #     with aside(cls="bd-sidebar"):
@@ -163,9 +189,9 @@ def make_nav(page, is_map = False):
 #                     link += i(cls="bi bi-gear-fill")
 #                     link += " Options"
 
+
 def make_footer(page=None):
     script(src="/js/jquery.min.js")
-    script(src="/js/jstorage.min.js")
     script(src='/js/progress.js')
     script(src='/js/item_links.js')
     script(src='/js/common.js')
@@ -215,74 +241,36 @@ def make_footer(page=None):
             }})( jQuery );
             """.format(page_id=page['id']))
 
+
 def make_index():
     doc = make_doc("圆桌指引", "艾尔登法环指引和进度追踪")
     with doc:
         make_nav('index')
         with div(cls="container"):
             with div(cls="row"):
-                with div(cls="col-md-12 text-center"):
-                    h1("圆桌指引", cls="mt-4")
-                with div(cls="row gy-3"):
-                    with div(cls="col-md-4 col-12"):
-                        with div(cls='card shadow'):
+                with div(cls="col-md text-center"):
+                    h1("艾尔登法环游戏记录")
+                with div(cls='row row-cols-md-3'):
+                    for name, l in dropdowns:
+                        with div(cls="card shadow"):
                             with div(cls="card-body uncolor-links"):
-                                h5('进度追踪', cls='card-title text-center')
-                                with ul(id='progress_list', cls='nav flex-column'):
-                                    hr()
-                                    for name, l in dropdowns:
-                                        for guide in l:
-                                            li(cls='tab-li').add(a(guide[0], href="/checklists/" + to_snake_case(guide[1]) + '.html')).add(span(id=guide[1] + "_progress_total", cls='d-print-none'))
-                                        hr()
-                    with div(cls='col-md-8 col-12'):
-                        with div(cls='row row-cols-1 row-cols-md-2 gy-3'):
-                            with div(cls="col"):
-                                with div(cls="card shadow h-100"):
-                                    with div(cls="card-body"):
-                                        h5('欢迎来到圆桌指引', cls='card-title text-center')
-                                        p('艾尔登法环指引，攻略和进度追踪。由玩家编写和维护。我们还在努力改进和完善站点内容。', cls='card-text')
-                            with div(cls='col'):
-                                with div(cls='card shadow h-100'):
-                                    with div(cls='card-body'):
-                                        h5('Get the Apps!', cls='card-title text-center')
-                                        with div(style='width: 180px;', cls='badge'):
-                                            with a(href='https://apps.apple.com/us/app/elden-ring-guides/id1620436088?itsct=apps_box_badge&amp;itscg=30200'):
-                                                img(src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83&amp;releaseDate=1650585600&h=3eb10370b9c49cf5b5dde5ca0352f23a", alt="Download on the App Store", style='margin: 6%; width: 88%;')
-                                        with div(style='width: 180px;', cls='badge'):
-                                            with a(href='https://play.google.com/store/apps/details?id=com.roundtablehold.eldenringguides&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1', style='width: 100%;'):
-                                                img(src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png', style='width: 100%;')
-                            with div(cls="col"):
-                                with div(cls="card shadow h-100"):
-                                    with div(cls="card-body"):
-                                        h5('相关资源(英文版)', cls='card-title text-center')
-                                        p('加入圆桌厅 ', cls='card-text').add(a('Discord 社区', href='https://discord.gg/BzJzFeBjHr'))
-                                        p('更多来自社区的指引请看 ', cls='card-text').add(a('/r/Roundtable_Guides', href='https://www.reddit.com/r/Roundtable_Guides/'))
-                                        p('视频指引请看 ', cls='card-text').add(a('YouTube 频道', href='https://www.youtube.com/channel/UCE-I15Z8HQBNCFHq2V0bbsA'))
-                            with div(cls="col"):
-                                with div(cls='card shadow h-100'):
-                                    with div(cls="card-body"):
-                                        h5('我有问题要反馈，怎么对项目做出贡献？', cls='card-title text-center')
-                                        text = p(cls='card-text')
-                                        text += '方法很简单，你并不需要懂得如何编写网页代码，你可以在Github仓库'
-                                        text += a('(英文版)', href='https://github.com/RoundtableHold/roundtablehold.github.io')
-                                        text += '找到说明，或者直接去反馈bug'
-                                        text += a('(英文版)', href='https://github.com/RoundtableHold/roundtablehold.github.io/issues')
-                                        text += a('(中文版)', href='https://github.com/soarqin/roundtablehold/issues')
-                                        text += "，我们会尽快修复汇报的问题。"
-                            with div(cls="col"):
-                                with div(cls="card shadow h-100"):
-                                    with div(cls="card-body"):
-                                        h5('我可以追踪多个角色吗？', cls='card-title text-center')
-                                        p('可以，用选项页签的档案选择器设置多个不同的档案。', cls='card-text')
-                            with div(cls="col"):
-                                with div(cls="card shadow h-100"):
-                                    with div(cls="card-body"):
-                                        h5('列表追踪状态是怎么保存的？', cls='card-title text-center')
-                                        p("列表追踪状态数据保存在浏览器本地存储里。小心！清除浏览器缓存也会清空你的数据。", cls='card-text')
+                                for guide in l:
+                                    li(cls='tab-li').add(a(guide[0], href="/checklists/" + to_snake_case(
+                                        guide[1]) + '.html')).add(span(id=guide[1] + "_progress_total", cls='d-print-none'))
+                    with div(cls="card shadow"):
+                        with div(cls="card-body"):
+                            text = p(cls='card-text')
+                            text += a('本站',
+                                      href='https://github.com/liphx/elden_ring')
+                            text += 'fork自'
+                            text += a('roundtablehold',
+                                      href='https://github.com/soarqin/roundtablehold')
+                            text += '，用于展示个人游戏进度，记录功能可使用原仓库'
             make_footer()
             script(src="/js/index.js")
     with open(os.path.join('docs', 'index.html'), 'w', encoding='utf_8') as index:
         index.write(doc.render())
+
 
 def make_options():
     doc = make_doc('选项 | 圆桌指引', '艾尔登法环指引和进度追踪')
@@ -304,23 +292,30 @@ def make_options():
                             select(cls="form-select", id="profiles")
                         with div(cls="col col-12 col-md-4"):
                             with div(cls="btn-group"):
-                                button("添加", cls="btn btn-primary", type="button", id="profileAdd")
+                                button("添加", cls="btn btn-primary",
+                                       type="button", id="profileAdd")
                             with div(cls="btn-group"):
-                                button("编辑", cls="btn btn-primary", type="button", id="profileEdit")
+                                button("编辑", cls="btn btn-primary",
+                                       type="button", id="profileEdit")
                             with div(cls="btn-group"):
-                                button("新周目+", cls="btn btn-primary", type="button", id="profileNG+")
+                                button("新周目+", cls="btn btn-primary",
+                                       type="button", id="profileNG+")
                 with div(cls="row"):
                     div(cls="col col-12 col-md-4").add(h4("数据导入/导出:"))
                     with div(cls="col col-12 col-md-8"):
                         with form(cls="form-inline gap-1 m-1"):
                             with div(cls="btn-group pull-left"):
-                                button("从文件导入", cls="btn btn-primary", type="button", id="profileImport")
+                                button("从文件导入", cls="btn btn-primary",
+                                       type="button", id="profileImport")
                             with div(cls="btn-group pull-left"):
-                                button("导出为文件", cls="btn btn-primary", type="button", id="profileExport")
+                                button("导出为文件", cls="btn btn-primary",
+                                       type="button", id="profileExport")
                             with div(cls="btn-group pull-right"):
-                                button("从文本框导入", cls="btn btn-primary", type="button", id="profileImportText")
+                                button("从文本框导入", cls="btn btn-primary",
+                                       type="button", id="profileImportText")
                             with div(cls="btn-group pull-right mt-1 mt-md-0"):
-                                button("导出到剪切板", cls="btn btn-primary", type="button", id="profileExportText")
+                                button("导出到剪切板", cls="btn btn-primary",
+                                       type="button", id="profileExportText")
                     with div(cls='row'):
                         div(id='alert-div')
                     with div(cls='row'):
@@ -331,74 +326,97 @@ def make_options():
                     with div(cls="modal-content"):
                         with div(cls="modal-header"):
                             h3("档案", id="profileModalTitle", cls="modal-title")
-                            button(type="button", cls="btn-close", data_bs_dismiss="modal", aria_label="Close")
+                            button(type="button", cls="btn-close",
+                                   data_bs_dismiss="modal", aria_label="Close")
                         with div(cls="modal-body"):
                             with form(cls="form-horizontal"):
                                 with div(cls="control-group"):
-                                    label("名称", cls="control-label", _for="profileModalName")
-                                    div(cls="controls").add(input_(type="text", cls="form-control", id="profileModalName", placeholder="Enter Profile name"))
+                                    label("名称", cls="control-label",
+                                          _for="profileModalName")
+                                    div(cls="controls").add(input_(
+                                        type="text", cls="form-control", id="profileModalName", placeholder="Enter Profile name"))
                         with div(cls="modal-footer"):
-                            button("关闭", id="profileModalClose", cls="btn btn-secondary", data_bs_dismiss="modal")
-                            a("添加", href="#", id="profileModalAdd", cls="btn btn-primary", data_bs_dismiss="modal")
-                            a("更新", href="#", id="profileModalUpdate", cls="btn btn-primary")
-                            a("删除", href="#", id="profileModalDelete", cls="btn btn-primary")
+                            button("关闭", id="profileModalClose",
+                                   cls="btn btn-secondary", data_bs_dismiss="modal")
+                            a("添加", href="#", id="profileModalAdd",
+                              cls="btn btn-primary", data_bs_dismiss="modal")
+                            a("更新", href="#", id="profileModalUpdate",
+                              cls="btn btn-primary")
+                            a("删除", href="#", id="profileModalDelete",
+                              cls="btn btn-primary")
             with div(id="NG+Modal", cls="modal fade", tabindex="-1", role="dialog"):
                 with div(cls="modal-dialog", role="document"):
                     with div(cls="modal-content"):
                         with div(cls="modal-header"):
-                            h3("开始新的周目?", id="profileModalTitleNG", cls="modal-title")
-                            button(type="button", cls="btn-close", data_bs_dismiss="modal", aria_label="Close")
-                        div('如果开始新周目，“攻略”和“其他”页签的条目会被重制，成就和收集部分的条目会被保留。', cls="modal-body")
+                            h3("开始新的周目?", id="profileModalTitleNG",
+                               cls="modal-title")
+                            button(type="button", cls="btn-close",
+                                   data_bs_dismiss="modal", aria_label="Close")
+                        div('如果开始新周目，“攻略”和“其他”页签的条目会被重制，成就和收集部分的条目会被保留。',
+                            cls="modal-body")
                         with div(cls="modal-footer"):
-                            a("否", href="#", cls="btn btn-primary", data_bs_dismiss="modal")
+                            a("否", href="#", cls="btn btn-primary",
+                              data_bs_dismiss="modal")
                             a("是", href="#", cls="btn btn-danger", id="NG+ModalYes")
             with div(id='importTextModal', cls='modal fade', tabindex='-1', role='dialog'):
                 with div(cls='modal-dialog', role='document'):
                     with div(cls='modal-content'):
                         with div(cls='modal-header'):
                             h3('导入档案?', cls='modal-title')
-                            button(type='button', cls='btn-close', data_bs_dismiss='modal', aria_label='Close')
+                            button(type='button', cls='btn-close',
+                                   data_bs_dismiss='modal', aria_label='Close')
                         div('导入档案会覆盖你当前的进度。', cls='modal-body')
                         with div(cls='modal-footer'):
-                            a('否', href='#', cls='btn btn-primary', data_bs_dismiss='modal')
+                            a('否', href='#', cls='btn btn-primary',
+                              data_bs_dismiss='modal')
                             a('是', href='#', cls='btn btn-danger', id='importTextYes')
             with div(id='importFileModal', cls='modal fade', tabindex='-1', role='dialog'):
                 with div(cls='modal-dialog', role='document'):
                     with div(cls='modal-content'):
                         with div(cls='modal-header'):
                             h3('导入档案?', cls='modal-title')
-                            button(type='button', cls='btn-close', data_bs_dismiss='modal', aria_label='Close')
+                            button(type='button', cls='btn-close',
+                                   data_bs_dismiss='modal', aria_label='Close')
                         div('导入档案会覆盖你当前的进度。')
                         with div(cls='modal-footer'):
-                            a('否', href='#', cls='btn btn-primary', data_bs_dismiss='modal')
+                            a('否', href='#', cls='btn btn-primary',
+                              data_bs_dismiss='modal')
                             a('是', href='#', cls='btn btn-danger', id='importFileYes')
             with div(id='deleteModal', cls='modal fade', tabindex='-1', role='dialog'):
                 with div(cls='modal-dialog', role='document'):
                     with div(cls='modal-content'):
                         with div(cls='modal-header'):
                             h3('确定吗？', cls='modal-title')
-                            button(type='button', cls='btn-close', data_bs_dismiss='modal', aria_label='Close')
+                            button(type='button', cls='btn-close',
+                                   data_bs_dismiss='modal', aria_label='Close')
                         div('你会失去档案里的全部进度，必要时请注意备份。')
                         with div(cls='modal-footer'):
-                            a('否', href='#', cls='btn btn-primary', data_bs_dismiss='modal')
+                            a('否', href='#', cls='btn btn-primary',
+                              data_bs_dismiss='modal')
                             a('是', href='#', cls='btn btn-danger', id='deleteYes')
 
-        div(cls="hiddenfile").add(input_(name="upload", type="file", id="fileInput"))
+        div(cls="hiddenfile").add(
+            input_(name="upload", type="file", id="fileInput"))
         make_footer()
         script(src="/js/options.js")
     with open(os.path.join('docs', 'options.html'), 'w', encoding='utf_8') as index:
         index.write(doc.render())
 
+
 img_size = '70'
+
 
 def add_icon(icon, classes):
     p = os.path.join('docs', icon[1:])
     im = Image.open(p)
     width, height = im.size
     if width > height:
-        img(data_src=icon, loading='lazy', cls=classes, style="width: 70px; height: {}px".format(int(height * (70 / width))))
+        img(data_src=icon, loading='lazy', cls=classes,
+            style="width: 70px; height: {}px".format(int(height * (70 / width))))
     else:
-        img(data_src=icon, loading='lazy', cls=classes, style="height: 70px; width: {}px".format(int(width * (70 / height))))
+        img(data_src=icon, loading='lazy', cls=classes,
+            style="height: 70px; width: {}px".format(int(width * (70 / height))))
+
 
 def make_checklist(page):
     page['num_ids'] = 0
@@ -426,11 +444,13 @@ def make_checklist(page):
                 with ul(id="toc_" + page['id'], cls="toc_page collapse"):
                     for s_idx, section in enumerate(page['sections']):
                         with li():
-                            a(section['title'], href="#" + page['id'] + '_section_'  + str(s_idx), cls="toc_link")
-                            span(id=page['id']  + "_nav_totals_" + str(s_idx))
+                            a(section['title'], href="#" + page['id'] +
+                              '_section_' + str(s_idx), cls="toc_link")
+                            span(id=page['id'] + "_nav_totals_" + str(s_idx))
 
             with div(cls="input-group d-print-none"):
-                input_(type="search", id=page['id'] + "_search", cls="form-control my-3", placeholder="请输入搜索内容...")
+                input_(type="search", id=page['id'] + "_search",
+                       cls="form-control my-3", placeholder="请输入搜索内容...")
 
             with div(id=page['id']+"_list"):
                 for s_idx, section in enumerate(page['sections']):
@@ -442,10 +462,12 @@ def make_checklist(page):
                             if 'icon' in section:
                                 add_icon(section['icon'], 'me-1')
                             if 'link' in section:
-                                a(section['title'], href=section['link'], cls='d-print-inline')
+                                a(section['title'], href=section['link'],
+                                  cls='d-print-inline')
                             else:
                                 span(section['title'], cls='d-print-inline')
-                            span(id=page['id'] + "_totals_" + str(s_idx), cls="mt-0 badge rounded-pill d-print-none")
+                            span(id=page['id'] + "_totals_" + str(s_idx),
+                                 cls="mt-0 badge rounded-pill d-print-none")
                         if 'table' in section:
                             with div(id=page['id'] + '_' + str(s_idx) + "Col", cls="collapse show row", aria_expanded="true"):
                                 if isinstance(section['table'], list):
@@ -463,13 +485,17 @@ def make_checklist(page):
                                     if isinstance(section['table'], list):
                                         with li(cls="list-group-item d-md-block d-none").add(div(cls="row form-check checkbox d-flex")):
                                             with div(cls="col-auto d-flex align-items-center"):
-                                                input_(cls="form-check-input invisible pe-0 me-0", type='checkbox')
+                                                input_(
+                                                    cls="form-check-input invisible pe-0 me-0", type='checkbox')
                                             with div(cls='col-auto d-flex align-items-center order-last'):
-                                                a(href='#', cls='invisible').add(i(cls='bi bi-geo-alt'))
+                                                a(href='#', cls='invisible').add(
+                                                    i(cls='bi bi-geo-alt'))
                                             with div(cls="col d-flex align-items-center d-md-block").add(div(cls="row")):
                                                 for idx, header in enumerate(section['table']):
-                                                    col_size = str(table_widths[idx])
-                                                    div(cls="ms-0 ps-0 d-flex align-items-center col-md-" + col_size).add(label(strong(header), cls='ms-0 ps-0'))
+                                                    col_size = str(
+                                                        table_widths[idx])
+                                                    div(cls="ms-0 ps-0 d-flex align-items-center col-md-" + col_size).add(
+                                                        label(strong(header), cls='ms-0 ps-0'))
                                     for item in items:
                                         id = str(item['id'])
                                         with li(cls="list-group-item searchable", data_id=page['realid'] + '_' + id, id='item_' + id):
@@ -479,34 +505,43 @@ def make_checklist(page):
                                             with div(cls="row form-check checkbox d-flex"):
                                                 with div(cls="col-auto d-flex align-items-center"):
                                                     input_(cls="form-check-input pe-0 me-0", type="checkbox", value="",
-                                                            id=page['realid'] + '_' + id, data_section_idx=str(s_idx))
+                                                           id=page['realid'] + '_' + id, data_section_idx=str(s_idx))
                                                     page['num_ids'] += 1
                                                     section['num_ids'] += 1
                                                 with div(cls='col-auto d-flex align-items-center order-last'):
                                                     href = '/map.html?'
                                                     if 'map_link' in item:
-                                                        href += 'x={}&y={}'.format(item['map_link'][0], item['map_link'][1])
+                                                        href += 'x={}&y={}'.format(
+                                                            item['map_link'][0], item['map_link'][1])
                                                     else:
-                                                        href += 'target={}_{}'.format(page['id'], item['id'])
-                                                    href += '&id={}&link={}&title={}'.format(page['realid'] + '_' + id, '/checklists/' + to_snake_case(page['id']) + '.html%23item_' + id, item['map_title'] if 'map_title' in item else item['data'][0])
-                                                    a(href=href, cls=('invisible' if (('cords' not in item) and ('map_link' not in item)) else '')).add(i(cls='bi bi-geo-alt'))
+                                                        href += 'target={}_{}'.format(
+                                                            page['id'], item['id'])
+                                                    href += '&id={}&link={}&title={}'.format(page['realid'] + '_' + id, '/checklists/' + to_snake_case(
+                                                        page['id']) + '.html%23item_' + id, item['map_title'] if 'map_title' in item else item['data'][0])
+                                                    a(href=href, cls=('invisible' if (('cords' not in item) and (
+                                                        'map_link' not in item)) else '')).add(i(cls='bi bi-geo-alt'))
                                                 with div(cls="col d-flex align-items-center d-md-block d-none").add(div(cls="row")):
                                                     for pos in range(table_cols):
-                                                        col_size = str(table_widths[pos])
+                                                        col_size = str(
+                                                            table_widths[pos])
                                                         with div(cls="ms-0 ps-0 d-flex align-items-center col-md-" + col_size):
                                                             with label(cls="form-check-label item_content ms-0 ps-0", _for=page['realid'] + '_' + id):
                                                                 if pos == 0 and 'icon' in item:
-                                                                    add_icon(item['icon'], 'me-1')
+                                                                    add_icon(
+                                                                        item['icon'], 'me-1')
                                                                 if item['data'][pos]:
                                                                     raw(item['data'][pos])
                                                 with div(cls='col d-md-none'):
                                                     with label(cls="form-check-label item_content ms-0 ps-0", _for=page['realid'] + '_' + id):
                                                         if 'icon' in item:
-                                                            add_icon(item['icon'], 'float-end')
+                                                            add_icon(
+                                                                item['icon'], 'float-end')
                                                         for pos in range(table_cols):
-                                                            col_size = str(table_widths[pos])
+                                                            col_size = str(
+                                                                table_widths[pos])
                                                             if isinstance(section['table'], list) and item['data'][pos]:
-                                                                strong(section['table'][pos] + ': ', cls="me-1")
+                                                                strong(
+                                                                    section['table'][pos] + ': ', cls="me-1")
                                                             if item['data'][pos]:
                                                                 raw(item['data'][pos])
                                                                 br()
@@ -523,23 +558,30 @@ def make_checklist(page):
                                         h5(raw(item))
                                         u = ul(cls="list-group-flush mb-0")
                                         continue
+
                                     def f(item):
                                         id = str(item['id'])
                                         with li(data_id=page['id'] + "_" + id, cls="list-group-item searchable ps-0", id='item_' + id):
                                             with div(cls="form-check checkbox d-flex align-items-center"):
-                                                input_(cls="form-check-input", type="checkbox", value="", id=page['realid'] + '_' + id, data_section_idx=str(s_idx))
+                                                input_(cls="form-check-input", type="checkbox", value="",
+                                                       id=page['realid'] + '_' + id, data_section_idx=str(s_idx))
                                                 with label(cls="form-check-label item_content", _for=page['realid'] + '_' + id):
                                                     if 'icon' in item:
-                                                        add_icon(item['icon'], 'float-md-none float-end me-md-1')
+                                                        add_icon(
+                                                            item['icon'], 'float-md-none float-end me-md-1')
                                                     raw(item['data'][0])
                                                 if 'cords' in item or 'map_link' in item:
                                                     href = '/map.html?'
                                                     if 'map_link' in item:
-                                                        href += 'x={}&y={}'.format(item['map_link'][0], item['map_link'][1])
+                                                        href += 'x={}&y={}'.format(
+                                                            item['map_link'][0], item['map_link'][1])
                                                     else:
-                                                        href += 'target={}_{}'.format(page['id'], id)
-                                                    href += '&id={}&link={}&title={}'.format(page['realid'] + '_' + id, '/checklists/' + to_snake_case(page['id']) + '.html%23item_' + id, item['map_title'] if 'map_title' in item else item['data'][0])
-                                                    a(href=href, cls='ms-2').add(i(cls='bi bi-geo-alt'))
+                                                        href += 'target={}_{}'.format(
+                                                            page['id'], id)
+                                                    href += '&id={}&link={}&title={}'.format(page['realid'] + '_' + id, '/checklists/' + to_snake_case(
+                                                        page['id']) + '.html%23item_' + id, item['map_title'] if 'map_title' in item else item['data'][0])
+                                                    a(href=href, cls='ms-2').add(
+                                                        i(cls='bi bi-geo-alt'))
                                                 page['num_ids'] += 1
                                                 section['num_ids'] += 1
                                     with u:
@@ -550,12 +592,14 @@ def make_checklist(page):
                                             for subitem in item:
                                                 f(subitem)
 
-        a(cls="btn btn-primary btn-sm fadingbutton back-to-top d-print-none").add(raw("Back to Top&thinsp;"), span(cls="bi bi-arrow-up"))
+        a(cls="btn btn-primary btn-sm fadingbutton back-to-top d-print-none").add(
+            raw("Back to Top&thinsp;"), span(cls="bi bi-arrow-up"))
         script(raw("window.current_page_id = \"{}\";\n".format(page['id'])))
         make_footer(page)
         script(src="/js/checklists.js")
     with open(os.path.join('docs', 'checklists', to_snake_case(page['id']) + '.html'), 'w', encoding='utf_8') as index:
         index.write(doc.render())
+
 
 def make_search():
     doc = make_doc("搜索 | 圆桌指引", '艾尔登法环指引和进度追踪')
@@ -567,8 +611,10 @@ def make_search():
                 h3('Search', cls='mt-4')
             with div(cls='row mt-4'):
                 with form(cls="d-flex"):
-                    input_(cls='form-control me-2', type='search', placeholder='Search', aria_label='search', id='page_search', name='search')
-                    button(id='search_submit', cls='btn').add(i(cls='bi bi-search'))
+                    input_(cls='form-control me-2', type='search', placeholder='Search',
+                           aria_label='search', id='page_search', name='search')
+                    button(id='search_submit', cls='btn').add(
+                        i(cls='bi bi-search'))
             with div(cls='row mt-4 d-flex justify-content-center d-none', id='spinner'):
                 with div(cls='spinner-border text-primary', role='status'):
                     span('加载中...', cls='visually-hidden')
@@ -587,36 +633,46 @@ def make_search():
                                 table_widths = section['table_widths'] if 'table_widths' in section else page['table_widths']
                                 for item in items:
                                     with a(cls='d-none list-group-item list-group-item-action searchable', href='/checklists/' + to_snake_case(page['id']) + '.html#item_' + str(item['id']), id='/checklists/' + to_snake_case(page['id']) + '.html#item_' + str(item['id'])):
-                                        if isinstance(item,str):
+                                        if isinstance(item, str):
                                             continue
                                         with div(cls='row d-md-flex d-none'):
                                             for pos in range(table_cols):
-                                                col_size = str(table_widths[pos])
+                                                col_size = str(
+                                                    table_widths[pos])
                                                 with div(cls='d-flex align-items-center col-md-' + col_size):
                                                     if pos == 0 and 'icon' in item:
-                                                        add_icon(item['icon'], 'me-1')
+                                                        add_icon(
+                                                            item['icon'], 'me-1')
                                                     if item['data'][pos]:
-                                                        raw(strip_a_tags(item['data'][pos]))
+                                                        raw(strip_a_tags(
+                                                            item['data'][pos]))
                                         with div(cls='row d-md-none').add(div(cls='col')):
                                             if 'icon' in item:
-                                                add_icon(item['icon'], 'float-end')
+                                                add_icon(
+                                                    item['icon'], 'float-end')
                                             for pos in range(table_cols):
-                                                col_size = str(table_widths[pos])
+                                                col_size = str(
+                                                    table_widths[pos])
                                                 if isinstance(section['table'], list) and item['data'][pos]:
-                                                    strong(strip_a_tags(section['table'][pos]) + ': ', cls='me-1')
+                                                    strong(strip_a_tags(
+                                                        section['table'][pos]) + ': ', cls='me-1')
                                                 if item['data'][pos]:
-                                                    raw(strip_a_tags(item['data'][pos]))
+                                                    raw(strip_a_tags(
+                                                        item['data'][pos]))
                                                     br()
                             else:
                                 for item in items:
                                     if isinstance(item, str):
                                         continue
+
                                     def f(item):
                                         with a(cls='d-none list-group-item list-group-item-action searchable', href='/checklists/' + to_snake_case(page['id']) + '.html#item_' + str(item['id']), id='/checklists/' + to_snake_case(page['id']) + '.html#item_' + str(item['id'])):
                                             with div(cls='d-flex align-items-center'):
                                                 if 'icon' in item:
-                                                    add_icon(item['icon'], 'float-md-none float-end me-md-1')
-                                                raw(strip_a_tags(item['data'][0]))
+                                                    add_icon(
+                                                        item['icon'], 'float-md-none float-end me-md-1')
+                                                raw(strip_a_tags(
+                                                    item['data'][0]))
                                     f(item)
                                     if isinstance(items.peek(0), list):
                                         item_id = str(item['id'])
@@ -632,10 +688,12 @@ def make_search():
     with open(os.path.join('docs', 'search.html'), 'w', encoding='utf_8') as out:
         out.write(doc.render())
 
+
 def to_list(x):
     if isinstance(x, list):
         return set(x)
     return set([x])
+
 
 def make_item_links():
     links_json = {}
@@ -643,55 +701,71 @@ def make_item_links():
         if 'source' in l:
             for t in to_list(l['target']):
                 if (str(t)) not in all_ids:
-                    print('Potential typo in item links. "' + str(t) + '" is not a valid id')
+                    print('Potential typo in item links. "' +
+                          str(t) + '" is not a valid id')
             for s in to_list(l['source']):
                 if (str(s)) not in all_ids:
-                    print('Potential typo in item links. "' + str(s) + '" is not a valid id')
+                    print('Potential typo in item links. "' +
+                          str(s) + '" is not a valid id')
                 t = to_list(l['target'])
                 t.discard(s)
-                links_json.setdefault(s, {}).setdefault('targets', []).extend(list(t))
+                links_json.setdefault(s, {}).setdefault(
+                    'targets', []).extend(list(t))
                 links_json.setdefault(s, {}).setdefault('targets', []).sort()
         if 'source_or' in l:
             for t in to_list(l['target']):
                 if (str(t)) not in all_ids:
-                    print('Potential typo in item links. "' + str(t) + '" is not a valid id')
+                    print('Potential typo in item links. "' +
+                          str(t) + '" is not a valid id')
             for s in to_list(l['source_or']):
                 if (str(s)) not in all_ids:
-                    print('Potential typo in item links. "' + str(s) + '" is not a valid id')
+                    print('Potential typo in item links. "' +
+                          str(s) + '" is not a valid id')
                 ss = to_list(l['source_or'])
                 ss.discard(s)
                 t = to_list(l['target'])
                 t.discard(s)
-                links_json.setdefault(s, {}).setdefault('orsources', []).extend(list(ss))
+                links_json.setdefault(s, {}).setdefault(
+                    'orsources', []).extend(list(ss))
                 links_json.setdefault(s, {}).setdefault('orsources', []).sort()
-                links_json.setdefault(s, {}).setdefault('ortargets', []).extend(list(t))
+                links_json.setdefault(s, {}).setdefault(
+                    'ortargets', []).extend(list(t))
                 links_json.setdefault(s, {}).setdefault('ortargets', []).sort()
         if 'source_and' in l:
             for t in to_list(l['target']):
                 if (str(t)) not in all_ids:
-                    print('Potential typo in item links. "' + str(t) + '" is not a valid id')
+                    print('Potential typo in item links. "' +
+                          str(t) + '" is not a valid id')
             for s in to_list(l['source_and']):
                 if (str(s)) not in all_ids:
-                    print('Potential typo in item links. "' + str(s) + '" is not a valid id')
+                    print('Potential typo in item links. "' +
+                          str(s) + '" is not a valid id')
                 ss = to_list(l['source_and'])
                 ss.discard(s)
                 t = to_list(l['target'])
                 t.discard(s)
-                links_json.setdefault(s, {}).setdefault('andsources', []).extend(list(ss))
-                links_json.setdefault(s, {}).setdefault('andsources', []).sort()
-                links_json.setdefault(s, {}).setdefault('andtargets', []).extend(list(t))
-                links_json.setdefault(s, {}).setdefault('andtargets', []).sort()
+                links_json.setdefault(s, {}).setdefault(
+                    'andsources', []).extend(list(ss))
+                links_json.setdefault(s, {}).setdefault(
+                    'andsources', []).sort()
+                links_json.setdefault(s, {}).setdefault(
+                    'andtargets', []).extend(list(t))
+                links_json.setdefault(s, {}).setdefault(
+                    'andtargets', []).sort()
         if 'link_all' in l:
             for s in to_list(l['link_all']):
                 if (str(s)) not in all_ids:
-                    print('Potential typo in item links. "' + str(s) + '" is not a valid id')
+                    print('Potential typo in item links. "' +
+                          str(s) + '" is not a valid id')
                 t = to_list(l['link_all'])
                 t.discard(s)
-                links_json.setdefault(s, {}).setdefault('targets', []).extend(list(t))
+                links_json.setdefault(s, {}).setdefault(
+                    'targets', []).extend(list(t))
                 links_json.setdefault(s, {}).setdefault('targets', []).sort()
     with open(os.path.join('docs', 'js', 'item_links.js'), 'w', encoding='UTF-8') as links_f:
         links_f.write('const item_links = ')
         json.dump(links_json, links_f, indent=2, sort_keys=True)
+
 
 def make_progress_js():
     with open(os.path.join('docs', 'js', 'progress.js'), 'w', encoding='utf_8') as f:
@@ -704,6 +778,7 @@ def make_progress_js():
                 f.write('      [0, {}],\n'.format(section['num_ids']))
             f.write('    ],\n  },\n')
         f.write('};\n')
+
 
 def make_index_js():
     with open(os.path.join('docs', 'js', 'index.js'), 'w', encoding='utf_8') as f:
@@ -721,25 +796,33 @@ def make_index_js():
         f.write(']);\n')
         f.write('function calculateProgress() {\n')
         for page in pages:
-            f.write('const ' + page['id'] + '_total = ' + str(page['num_ids']) + ';\n')
+            f.write('const ' + page['id'] +
+                    '_total = ' + str(page['num_ids']) + ';\n')
             f.write('var ' + page['id'] + '_checked = 0;\n')
-        f.write('for (var id in profiles[profilesKey][profiles.current].checklistData) {\n')
-        f.write('if (profiles[profilesKey][profiles.current].checklistData[id] === true && all_ids.has(id)) {\n')
+        f.write(
+            'for (var id in profiles[profilesKey][profiles.current].checklistData) {\n')
+        f.write(
+            'if (profiles[profilesKey][profiles.current].checklistData[id] === true && all_ids.has(id)) {\n')
         for page in pages:
-            f.write('if (id.startsWith("{page_id}_")) {{\n'.format(page_id=page['realid']))
+            f.write('if (id.startsWith("{page_id}_")) {{\n'.format(
+                page_id=page['realid']))
             f.write(page['id'] + '_checked += 1;\n}\n')
         f.write('}\n')
         f.write('}\n')
         for page in pages:
-            f.write('if ({page_id}_checked >= {page_id}_total){{\n'.format(page_id=page['id']))
-            f.write('$("#{page_id}_progress_total").html("DONE");\n'.format(page_id=page['id']))
+            f.write('if ({page_id}_checked >= {page_id}_total){{\n'.format(
+                page_id=page['id']))
+            f.write('$("#{page_id}_progress_total").html("DONE");\n'.format(
+                page_id=page['id']))
             f.write('} else {\n')
-            f.write('$("#{page_id}_progress_total").html({page_id}_checked + "/" + {page_id}_total);\n'.format(page_id=page['id']))
+            f.write(
+                '$("#{page_id}_progress_total").html({page_id}_checked + "/" + {page_id}_total);\n'.format(page_id=page['id']))
             f.write('}\n')
         f.write('}\n')
         f.write('calculateProgress();\n')
         f.write('  });\n')
         f.write('})( jQuery );\n')
+
 
 def make_search_index():
     search_idx = []
@@ -749,6 +832,7 @@ def make_search_index():
             for item in items:
                 if isinstance(item, str):
                     continue
+
                 def f(item):
                     search_idx.append({
                         'id': '/checklists/{page_href}#item_{id}'.format(page_href=to_snake_case(page['id']) + '.html', id=item['id']),
@@ -766,7 +850,9 @@ def make_search_index():
                         # })
 
     with open(os.path.join('docs', 'search_index.json'), 'w', encoding='utf-8') as s_idx:
-        json.dump(search_idx, s_idx, indent=2, sort_keys=True, ensure_ascii=False)
+        json.dump(search_idx, s_idx, indent=2,
+                  sort_keys=True, ensure_ascii=False)
+
 
 def get_icon(page, section, item):
     icon = ''
@@ -799,6 +885,7 @@ def get_icon(page, section, item):
         print("Missing icon for {}".format(page['id'] + '_' + item['id']))
     return (icon, icon_size)
 
+
 def make_feature(page, section, item):
     icon, icon_size = get_icon(page, section, item)
     return {
@@ -818,7 +905,10 @@ def make_feature(page, section, item):
         }
     }
 
+
 pages_in_map = set()
+
+
 def make_geojson():
     layers = []
     icons = set()
@@ -835,14 +925,16 @@ def make_geojson():
                     continue
                 if 'cords' in item:
                     has_features = True
-                    geojson['features'].append(make_feature(page, section, item))
+                    geojson['features'].append(
+                        make_feature(page, section, item))
                     icons.add(get_icon(page, section, item)[0])
                 if isinstance(items.peek(0), list):
                     item = next(items)
                     for subitem in item:
                         if 'cords' in subitem:
                             has_features = True
-                            geojson['features'].append(make_feature(page, section, subitem))
+                            geojson['features'].append(
+                                make_feature(page, section, subitem))
                             icons.add(get_icon(page, section, item)[0])
         if has_features:
             layers.append(geojson)
@@ -855,8 +947,10 @@ def make_geojson():
         l.sort()
         json.dump(l, outf, indent=2, sort_keys=True)
 
+
 def make_map():
-    doc = make_doc('Map | Roundtable Guides', 'Elden Ring Guides and Progress Tracker')
+    doc = make_doc('Map | Roundtable Guides',
+                   'Elden Ring Guides and Progress Tracker')
     with doc.head:
         link(rel='stylesheet', href='/map/src/css/ol.css')
         link(rel='stylesheet', href='/map/src/css/map.css')
@@ -874,7 +968,8 @@ def make_map():
                 with div(cls='offcanvas-body overflow-auto h-100'):
                     with div(cls='d-flex align-items-center justify-content-between'):
                         h3('图层标记', cls='offcanvas-title')
-                        button(type='button', cls='btn-close text-reset', data_bs_dismiss='offcanvas')
+                        button(type='button', cls='btn-close text-reset',
+                               data_bs_dismiss='offcanvas')
                     hr()
                     # with div(cls='row mb-2'):
                     #     with div(cls='col-auto order-last'):
@@ -882,8 +977,10 @@ def make_map():
                     #     with div(cls='col text-center'):
                     #         h3('Layers')
                     with div(cls='mb-2 d-flex justify-content-evenly'):
-                        button('显示全部', type='button', cls='btn btn-secondary btn-sm', id='show-all')
-                        button('隐藏全部', type='button', cls='btn btn-secondary btn-sm', id='hide-all')
+                        button('显示全部', type='button',
+                               cls='btn btn-secondary btn-sm', id='show-all')
+                        button('隐藏全部', type='button',
+                               cls='btn btn-secondary btn-sm', id='hide-all')
                     for name, l in dropdowns:
                         should_print_category = False
                         for guide in l:
@@ -895,22 +992,28 @@ def make_map():
                             for guide in l:
                                 if guide[1] in pages_in_map:
                                     with div(cls='form-check ps-0'):
-                                        input_(type='checkbox', cls='btn-check category-filter', id=guide[1], autocomplete='off')
-                                        b = label(cls='btn btn-sm btn-secondary w-100 text-start', _for=guide[1])
+                                        input_(
+                                            type='checkbox', cls='btn-check category-filter', id=guide[1], autocomplete='off')
+                                        b = label(
+                                            cls='btn btn-sm btn-secondary w-100 text-start', _for=guide[1])
                                         if guide[2]:
-                                            b += img(data_src=guide[2], loading='lazy', height=25, width=25, cls='me-1')
+                                            b += img(data_src=guide[2], loading='lazy',
+                                                     height=25, width=25, cls='me-1')
                                         b += guide[0]
-                                        b += span(id=guide[1] + '_progress_total')
+                                        b += span(id=guide[1] +
+                                                  '_progress_total')
                     hr()
                     with div(cls='form-check'):
-                        input_(cls='form-check-input', type='checkbox', value='', id='hideCompleted')
-                        label('隐藏已完成', cls='form-check-label', _for='hideCompleted')
-                                        # l = label(cls='form-check-label layer-button', _for=guide[1])
-                                        # l += input_(cls='form-check-input category-filter', type='checkbox', value='', id=guide[1], hidden='')
-                                        # if guide[2]:
-                                        #     l += img(data_src=guide[2], loading='lazy', height=20, width=20, cls='me-1')
-                                        # l += guide[0]
-                                        # l += span(id=guide[1] + "_progress_total")
+                        input_(cls='form-check-input', type='checkbox',
+                               value='', id='hideCompleted')
+                        label('隐藏已完成', cls='form-check-label',
+                              _for='hideCompleted')
+                        # l = label(cls='form-check-label layer-button', _for=guide[1])
+                        # l += input_(cls='form-check-input category-filter', type='checkbox', value='', id=guide[1], hidden='')
+                        # if guide[2]:
+                        #     l += img(data_src=guide[2], loading='lazy', height=20, width=20, cls='me-1')
+                        # l += guide[0]
+                        # l += span(id=guide[1] + "_progress_total")
                         # with li(cls="dropdown nav-item"):
                         #     a(name, cls="nav-link dropdown-toggle" + (' active' if page_in_dropdown else ''), href="#", data_bs_toggle="dropdown", aria_haspopup="true", aria_expanded="false").add(span(cls="caret"))
                         #     with ul(cls="dropdown-menu"):
@@ -920,17 +1023,22 @@ def make_map():
             with div(id='popup', cls='card shadow'):
                 # a(href='#', id='popup-closer', cls='ol-popup-closer')
                 with div(cls="card-body form-check checkbox d-flex align-items-center popup-content"):
-                    input_(cls="form-check-input", type="checkbox", value="", id='popup-checkbox')
-                    label(cls="form-check-label item_content ms-2", _for='popup-checkbox', id='popup-title')
-                    a(href="#", id='popup-link', cls='ms-3').add(i(cls='bi bi-link-45deg'))
+                    input_(cls="form-check-input", type="checkbox",
+                           value="", id='popup-checkbox')
+                    label(cls="form-check-label item_content ms-2",
+                          _for='popup-checkbox', id='popup-title')
+                    a(href="#", id='popup-link',
+                      cls='ms-3').add(i(cls='bi bi-link-45deg'))
                     with div(cls='d-none', id='dev-mode-copy'):
-                        a('map_link', type='button', cls='btn btn-primary btn-sm', id='dev-mode-copy-button')
+                        a('map_link', type='button',
+                          cls='btn btn-primary btn-sm', id='dev-mode-copy-button')
         make_footer()
         script(src='/map/src/js/ol.js')
         script(src='/map/src/js/features.js')
         script(src='/map/src/js/map.js')
     with open(os.path.join('docs', 'map.html'), 'w', encoding='utf_8') as f:
         f.write(doc.render())
+
 
 make_index()
 make_options()
