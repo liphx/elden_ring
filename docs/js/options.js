@@ -4,7 +4,7 @@
     GetProfiles();
 
     jQuery(document).ready(function ($) {
-        // Get the right style going...
+        reload();
 
         function updateTextbox() {
             document.getElementById("profileText").value =
@@ -16,11 +16,13 @@
             var stylesheet = $("#themes").val();
             window.themeSetup(stylesheet);
             profiles[profilesKey][profiles.current].style = stylesheet;
+            SetProfiles();
             reload();
         });
 
-        $("#profiles").change(function (event) {
+        $("#userProfiles").change(function (event) {
             profiles.current = $(this).val();
+            SetProfiles();
             reload();
 
             $("li .checkbox .completed").show();
@@ -54,6 +56,7 @@
                 initializeProfile(profile);
 
                 profiles.current = profile;
+                SetProfiles();
                 reload();
                 populateProfiles();
             }
@@ -80,6 +83,7 @@
                     profiles[profilesKey][profiles.current];
                 delete profiles[profilesKey][profiles.current];
                 profiles.current = newName;
+                SetProfiles();
                 populateProfiles();
                 reload();
             }
@@ -99,6 +103,7 @@
             }
             delete profiles[profilesKey][profiles.current];
             profiles.current = getFirstProfile();
+            SetProfiles();
             populateProfiles();
             $("#profileModal").modal("hide");
             reload();
@@ -123,6 +128,7 @@
             if (profiles[profilesKey][profiles.current].journey < 3) {
                 profiles[profilesKey][profiles.current].journey++;
             }
+            SetProfiles();
             $("#NG\\+Modal").modal("hide");
             reload();
             myalert("NG+ Started", "success");
@@ -202,6 +208,7 @@
                     document.getElementById("profileText").value,
                 );
                 profiles = jsonProfileData;
+                SetProfiles();
                 reload();
             } catch (e) {
                 myalert(e, "danger");
@@ -216,7 +223,7 @@
             var jsonProfileData = JSON.parse(arg.currentTarget.result);
             profiles = jsonProfileData;
             populateProfiles();
-            $("#profiles").trigger("change");
+            $("#userProfiles").trigger("change");
             reload();
             myalert("Successfully imported", "success");
         }
@@ -245,13 +252,13 @@
     }
 
     function populateProfiles() {
-        $("#profiles").empty();
+        $("#userProfiles").empty();
         $.each(profiles[profilesKey], function (index, value) {
-            $("#profiles").append(
+            $("#userProfiles").append(
                 $("<option></option>").attr("value", index).text(index),
             );
         });
-        $("#profiles").val(profiles.current);
+        $("#userProfiles").val(profiles.current);
     }
 
     function canDelete() {

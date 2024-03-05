@@ -109,19 +109,6 @@ def make_doc(title, description):
     return doc
 
 
-def title_row():
-    with div(cls="row"):
-        with div(cls="col-md-12 text-center"):
-            h1("Roundtable Hold", cls="mt-3")
-            text = p(cls="lead d-print-none")
-            text += "英文版贡献页面: "
-            text += a("Github Page",
-                      href="https://github.com/RoundtableHold/roundtablehold.github.io")
-            text += "&nbsp;&nbsp;汉化版贡献页面: "
-            text += a("Github Page",
-                      href="https://github.com/soarqin/roundtablehold")
-
-
 def hide_completed_button():
     with div(id="btnHideCompleted", cls="mb-3 d-print-none"):
         with div(cls="form-check form-switch"):
@@ -289,7 +276,7 @@ def make_options():
                     div(cls="col col-12 col-md-4").add(h4("档案管理:"))
                     with form(cls="form-inline input-group pull-right gap-1"):
                         with div(cls="col col-12 col-md-4"):
-                            select(cls="form-select", id="profiles")
+                            select(cls="form-select", id="userProfiles")
                         with div(cls="col col-12 col-md-4"):
                             with div(cls="btn-group"):
                                 button("添加", cls="btn btn-primary",
@@ -425,7 +412,6 @@ def make_checklist(page):
         make_nav(to_snake_case(page['id']))
         # whole page
         with div(cls="container uncolor-links"):
-            # title_row()
             # Filter buttons
             with div(cls="row text-center"):
                 h = h1(cls='mt-4')

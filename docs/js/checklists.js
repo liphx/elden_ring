@@ -49,6 +49,7 @@
                 .toggleClass("hide_completed", !hidden);
 
             profiles[profilesKey][profiles.current].hide_completed = !hidden;
+            SetProfiles();
         });
 
         function populateChecklists() {
@@ -214,23 +215,7 @@
                 $(this).attr("href")
             ] = !saved_tab_state;
 
+            SetProfiles();
         });
-
-        // $('.nav.navbar-nav li a,#progress_list li a').on('click', function(event) {
-        //     if ($(event.currentTarget).hasClass('dropdown-toggle')) {
-        //         return;
-        //     }
-
-        //     var href = $(this).attr('href');
-
-        //     profiles[profilesKey][profiles.current].current_tab = href;
-        //     window.scrollTo(0,0);
-
-        //     $('#nav-collapse').collapse('hide');
-
-        //     $('.tab-li a').removeClass('active');
-        //     $('.tab-li a[href="' + href + '"]').addClass('active');
-        //     $('a[href="' + href + '"].dropdown-item').closest('.dropdown').children('a').addClass('active');
-        // });
     });
 })(jQuery);

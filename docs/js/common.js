@@ -33,15 +33,25 @@ var themes = {
 
 function GetProfiles() {
     if (!("profiles" in window)) {
+        let data = sessionStorage.getItem(profilesKey);
+        if (data != null) {
+            window.profiles = JSON.parse(data);
+            return;
+        }
         $.ajax({
             url: "/profiles.json",
             dataType: "json",
             async: false,
             success: function (data) {
                 window.profiles = data;
+                SetProfiles();
             },
         });
     }
+}
+
+function SetProfiles() {
+    sessionStorage.setItem(profilesKey, JSON.stringify(window.profiles));
 }
 
 (function ($) {
@@ -64,6 +74,7 @@ function GetProfiles() {
             profiles[profilesKey][profile_name].style = "Standard";
         if (!("map_settings" in profiles[profilesKey][profile_name]))
             profiles[profilesKey][profile_name].map_settings = {};
+        SetProfiles();
     };
 
     window.themeSetup = function (stylesheet) {
@@ -132,6 +143,7 @@ function GetProfiles() {
         }
         profiles[profilesKey][profiles.current].checklistData[id] = !!checked;
         setCheckbox(id, checked);
+        SetProfiles();
 
         if (id in item_links) {
             var links = item_links[id];

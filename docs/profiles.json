@@ -1,7 +1,7 @@
 {
-    "current": "liph",
+    "current": "LIPH PS5 4th",
     "elden_ring": {
-        "liph": {
+        "LIPH PS5 4th": {
             "checklistData": {
                 "weapons_5_5": true,
                 "weapons_5_1": true,
@@ -489,6 +489,17 @@
                     "-7328.00"
                 ]
             }
+        },
+        "LIPH Steam 1st": {
+            "checklistData": {
+                "bosses_2_1": true,
+                "caves_1_1": true
+            },
+            "collapsed": {},
+            "hide_completed": false,
+            "journey": 1,
+            "style": "Standard",
+            "map_settings": {}
         }
     }
 }
