@@ -124,7 +124,7 @@ def make_nav(page, is_map=False):
             # with div(cls='order-sm-last d-none d-sm-block ms-auto'):
             with button(type="button", cls="navbar-toggler", data_bs_toggle="collapse", data_bs_target="#nav-collapse", aria_expanded="false", aria_controls="nav-collapse", aria_label="Toggle navigation"):
                 span(cls="navbar-toggler-icon")
-            a('圆桌指引', cls="navbar-brand me-auto ms-2" +
+            a('艾尔登法环', cls="navbar-brand me-auto ms-2" +
               (' active' if page == 'index' else ''), href="/index.html")
             with form(cls="d-none d-sm-flex order-2 order-xl-3"):
                 input_(cls='form-control me-2', type='search',
@@ -230,7 +230,7 @@ def make_footer(page=None):
 
 
 def make_index():
-    doc = make_doc("圆桌指引", "艾尔登法环指引和进度追踪")
+    doc = make_doc("艾尔登法环", "艾尔登法环指引和进度追踪")
     with doc:
         make_nav('index')
         with div(cls="container"):
@@ -260,13 +260,13 @@ def make_index():
 
 
 def make_options():
-    doc = make_doc('选项 | 圆桌指引', '艾尔登法环指引和进度追踪')
+    doc = make_doc('选项 | 艾尔登法环', '艾尔登法环指引和进度追踪')
     with doc:
         make_nav('options')
         with div(cls="container"):
             with div(cls="row"):
                 with div(cls="col-md-12 text-center"):
-                    h1("圆桌指引", cls="mt-4")
+                    h1("艾尔登法环", cls="mt-4")
             with div(cls="row"):
                 h2("Options")
                 with div(cls="row"):
@@ -407,7 +407,7 @@ def add_icon(icon, classes):
 
 def make_checklist(page):
     page['num_ids'] = 0
-    doc = make_doc(page['title'] + " | 圆桌指引", '艾尔登法环指引和进度追踪')
+    doc = make_doc(page['title'] + " | 艾尔登法环", '艾尔登法环指引和进度追踪')
     with doc:
         make_nav(to_snake_case(page['id']))
         # whole page
@@ -588,7 +588,7 @@ def make_checklist(page):
 
 
 def make_search():
-    doc = make_doc("搜索 | 圆桌指引", '艾尔登法环指引和进度追踪')
+    doc = make_doc("搜索 | 艾尔登法环", '艾尔登法环指引和进度追踪')
     with doc:
         make_nav('search')
         # whole page
