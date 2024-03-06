@@ -451,7 +451,26 @@
                 "bosses_15_3": true,
                 "achievements_1_5": true,
                 "great_runes_1_7": true,
-                "remembrances_mausoleums_1_15": true
+                "remembrances_mausoleums_1_15": true,
+                "bell_bearings_1_1": true,
+                "bosses_4_13": true,
+                "caves_2_5": true,
+                "bell_bearings_1_2": true,
+                "bell_bearings_1_4": true,
+                "ashesofwar_4_1": true,
+                "bosses_11_2": true,
+                "achievements_2_18": true,
+                "bell_bearings_2_1": true,
+                "bosses_5_13": true,
+                "caves_3_6": true,
+                "bell_bearings_2_4": true,
+                "bell_bearings_2_5": true,
+                "weapons_5_4": true,
+                "weapons_15_7": true,
+                "bell_bearings_2_2": true,
+                "bosses_6_9": true,
+                "caves_4_2": true,
+                "weapons_30_3": true
             },
             "collapsed": {
                 "#weapons_3Col": true,
@@ -541,9 +560,12 @@
                 "#bosses_14Col": true,
                 "#bosses_15Col": true,
                 "#bosses_16Col": true,
-                "#bosses_17Col": true
+                "#bosses_17Col": true,
+                "#bell_bearings_0Col": true,
+                "#bell_bearings_2Col": true,
+                "#bell_bearings_1Col": true
             },
-            "hide_completed": false,
+            "hide_completed": true,
             "journey": 1,
             "style": "Standard",
             "map_settings": {
