@@ -470,7 +470,12 @@
                 "bell_bearings_2_2": true,
                 "bosses_6_9": true,
                 "caves_4_2": true,
-                "weapons_30_3": true
+                "weapons_30_3": true,
+                "bell_bearings_1_3": true,
+                "bell_bearings_2_3": true,
+                "weapons_1_3": true,
+                "weapons_12_1": true,
+                "weapons_30_4": true
             },
             "collapsed": {
                 "#weapons_3Col": true,
@@ -561,9 +566,9 @@
                 "#bosses_15Col": true,
                 "#bosses_16Col": true,
                 "#bosses_17Col": true,
-                "#bell_bearings_0Col": true,
+                "#bell_bearings_0Col": false,
                 "#bell_bearings_2Col": true,
-                "#bell_bearings_1Col": true
+                "#bell_bearings_1Col": false
             },
             "hide_completed": true,
             "journey": 1,
